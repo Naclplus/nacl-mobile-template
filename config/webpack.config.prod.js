@@ -1,6 +1,6 @@
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
@@ -9,17 +9,17 @@ const { resolve } = require('./utils')
 module.exports = merge(baseConfig, {
     mode: 'production',
     entry: {
-        app: ['./src/index.js'],
+        app: ['./src/index.js']
     },
     output: {
         filename: '[name].[hash:9].js',
         chunkFilename: '[name].[hash:9].js',
         publicPath: './',
-        path: resolve('dist'),
+        path: resolve('dist')
     },
     optimization: {
         runtimeChunk: {
-            name: 'manifest',
+            name: 'manifest'
         },
         splitChunks: {
             name: true,
@@ -55,6 +55,6 @@ module.exports = merge(baseConfig, {
             },
             chunksSortMode: 'dependency'
         }),
-        new VueLoaderPlugin(),
-    ],
-});
+        new VueLoaderPlugin()
+    ]
+})

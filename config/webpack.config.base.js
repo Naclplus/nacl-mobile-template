@@ -11,20 +11,7 @@ let cssLoader = [
     'style-loader',
     {
         loader: 'css-loader',
-        options: { sourceMap: !isProduction },
-    },
-    {
-        loader: 'sass-loader',
-        options: { sourceMap: !isProduction },
-    },
-    {
-        loader: 'style-resources-loader',
-        options: {
-            patterns: [
-                resolve('src/styles/variables/*.scss'),
-                resolve('src/styles/mixins/*.scss'),
-            ]
-        }
+        options: { sourceMap: !isProduction }
     },
     {
         loader: 'postcss-loader',
@@ -32,27 +19,40 @@ let cssLoader = [
             plugins: () => [
                 flexBugsFixes(),
                 px2rem({
-                    remUnit: 75,
+                    remUnit: 37.5
                 }),
                 autoprefixer({
                     browsers: [
                         '>1%',
                         'last 4 versions',
                         'Firefox ESR',
-                        'not ie < 9', // React doesn't support IE8 anyway
+                        'not ie < 9' // React doesn't support IE8 anyway
                     ],
-                    flexbox: 'no-2009',
-                }),
-            ],
-        },
+                    flexbox: 'no-2009'
+                })
+            ]
+        }
     },
+    {
+        loader: 'sass-loader',
+        options: { sourceMap: !isProduction }
+    },
+    {
+        loader: 'style-resources-loader',
+        options: {
+            patterns: [
+                resolve('src/styles/variables/*.scss'),
+                resolve('src/styles/mixins/*.scss')
+            ]
+        }
+    }
 ]
 
 if (isProduction) {
     const styleLoader = cssLoader.shift()
     cssLoader = ExtractTextPlugin.extract({
         fallback: styleLoader,
-        use: cssLoader,
+        use: cssLoader
     })
 }
 
@@ -60,7 +60,7 @@ module.exports = {
     devtool: isProduction ? false : '#cheap-module-eval-source-map',
     output: {
         filename: '[name].[hash:9].js',
-        publicPath: isProduction ? './' : '',
+        publicPath: isProduction ? './' : ''
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
@@ -76,7 +76,7 @@ module.exports = {
                 enforce: 'pre',
                 include: [resolve('src'), resolve('test')],
                 options: {
-                    formatter: EslintFriendlyFormatter,
+                    formatter: EslintFriendlyFormatter
                 }
             },
             {
@@ -93,7 +93,7 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: 'images/[name].[hash:7].[ext]',
+                    name: 'images/[name].[hash:7].[ext]'
                 }
             },
             {
@@ -101,13 +101,13 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: 'fonts/[name].[hash:7].[ext]',
+                    name: 'fonts/[name].[hash:7].[ext]'
                 }
             },
             {
                 test: /\.(css|scss)$/,
-                use: cssLoader,
-            },
+                use: cssLoader
+            }
         ]
-    },
+    }
 }
