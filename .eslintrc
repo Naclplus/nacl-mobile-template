@@ -1,0 +1,25 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "parser": "babel-eslint",
+    "ecmaVersion": 2017
+  },
+  "plugins": ["vue"],
+  "extends": [
+    "eslint:recommended",
+    "standard",
+    "plugin:vue/base",
+    "plugin:vue/essential",
+    "plugin:vue/strongly-recommended",
+    "plugin:vue/recommended"
+  ],
+  "rules": {
+    "arrow-parens": 1,
+    "generator-star-spacing": 1,
+    "no-debugger": 1
+  }
+}
