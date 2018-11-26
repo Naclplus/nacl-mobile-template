@@ -5,6 +5,7 @@ const px2rem = require('postcss-px2rem')
 const autoprefixer = require('autoprefixer')
 const { resolve } = require('./utils')
 
+const remUnit = 37.5
 const isProduction = process.env.NODE_ENV === 'production'
 
 let cssLoader = [
@@ -19,7 +20,7 @@ let cssLoader = [
             plugins: () => [
                 flexBugsFixes(),
                 px2rem({
-                    remUnit: 37.5
+                    remUnit
                 }),
                 autoprefixer({
                     browsers: [
@@ -76,12 +77,23 @@ module.exports = {
                 enforce: 'pre',
                 include: [resolve('src'), resolve('test')],
                 options: {
+                    fix: true,
                     formatter: EslintFriendlyFormatter
                 }
             },
             {
                 test: /\.vue$/,
                 loader: 'vue-loader'
+            },
+            {
+                test: /\.html$/,
+                enforce: 'post',
+                oneOf: [
+                    {
+                        resourceQuery: /^\?vue/,
+                        loader: 'vue-style-px2rem-loader'
+                    }
+                ]
             },
             {
                 test: /\.js$/,

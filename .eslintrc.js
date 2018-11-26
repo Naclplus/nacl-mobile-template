@@ -1,4 +1,4 @@
-{
+module.exports = {
   "env": {
     "browser": true,
     "es6": true
@@ -21,8 +21,18 @@
     "arrow-parens": 1,
     "generator-star-spacing": 1,
     "no-debugger": 1,
+    "no-console": process.env.NODE_ENV === 'production' ? 2 : 0,
     "vue/html-indent": [1, 4],
     "indent": [1, 4],
-    "vue/name-property-casing": ["error", "kebab-case"]
+    "vue/name-property-casing": ["error", "kebab-case"],
+    "vue/max-attributes-per-line": [2, {
+      "singleline": 4,
+      "multiline": {
+        "max": 4,
+        "allowFirstLine": false
+      }
+    }],
+    "vue/no-v-html": 0,
+    "vue/no-unused-components": 0
   }
 }

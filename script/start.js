@@ -16,11 +16,11 @@ const compiler = webpack(webpackConfig)
 
 const devMiddleware = webpackDevMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
-    logLevel: 'silent',
+    logLevel: 'silent'
 })
 
 const hotMiddleware = webpackHotMiddleware(compiler, {
-    log: false,
+    log: false
 })
 
 // serve webpack bundle output
